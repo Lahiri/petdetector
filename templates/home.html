@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Detector{% endblock %}
+
+{% block main %}
+
+
+<div class="container">
+  <div class="card-deck mb-3">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal text-center">Url</h4>
+      </div>
+      <div class="card-body">
+        <form action="predict" method="post">
+          <label for="url">Paste the URL to a pet image</label>
+          <input type="url" class="form-control" name="url" id="url" value="" required>
+          <br>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Predict</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal text-center">File</h4>
+      </div>
+      <div class="card-body">
+        <form action="predict" method="post" enctype="multipart/form-data">
+          <label for="file">Upload the image of a pet</label>
+          <input type="file" class="form-control" name="file" id="file" required>
+          <br>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Predict</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% if images %}
+  <h2>Your predictions:</h2>
+  <ul>
+    {% for img in images.keys() %}
+    <a href="{{ img }}">
+      <li>{{ images[img] }}</li>
+    </a>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+{% endblock %}
